@@ -26,15 +26,11 @@ TBA
 ## Screenshots
  <table>
   <tr>
-     <td></td>
-     <td></td>
-     <td></td>
-     <td></td>
+     <td>Main Tasks List</td>
+     <td>Edit Task Details</td>
   </tr>
   <tr>
-    <td><img src="" width=250 height=480></td>
-    <td><img src="" width=250 height=480></td>
-    <td><img src="" width=250 height=480></td>
-    <td><img src="" width=250 height=480></td>
+    <td><img src="https://raw.githubusercontent.com/bielfernandezb/TodoApp/main/screenshots/Screenshot_1639335777.png" width=250 height=480></td>
+    <td><img src="https://raw.githubusercontent.com/bielfernandezb/TodoApp/main/screenshots/Screenshot_1639335780.png" width=250 height=480></td>
   </tr>
  </table>
