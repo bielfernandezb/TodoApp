@@ -62,7 +62,7 @@ class TasksViewHolder(
     fun bind(item: Task) {
         this.task = item
         itemBinding.title.text = item.mTitle
-        itemBinding.complete.setChecked(item.mCompleted)
+        itemBinding.complete.isChecked = item.mCompleted
     }
 
 

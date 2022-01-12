@@ -32,8 +32,7 @@ data class Task(
         parcel.readString().toString(),
         parcel.readString(),
         parcel.readByte() != 0.toByte()
-    ) {
-    }
+    )
 
     constructor(title: String, description: String?) : this(
         id = 0,
