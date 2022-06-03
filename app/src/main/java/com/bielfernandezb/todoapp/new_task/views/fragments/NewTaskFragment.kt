@@ -1,4 +1,4 @@
-package com.bielfernandezb.todoapp.views.fragments
+package com.bielfernandezb.todoapp.new_task.views.fragments
 
 import android.os.Bundle
 import android.text.Editable
@@ -12,7 +12,7 @@ import androidx.lifecycle.Observer
 import com.bielfernandezb.todoapp.databinding.FragmentNewTaskBinding
 import com.bielfernandezb.todoapp.model.entities.Task
 import com.bielfernandezb.todoapp.utils.Resource
-import com.bielfernandezb.todoapp.views.NewTaskViewModel
+import com.bielfernandezb.todoapp.new_task.NewTaskViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

@@ -19,23 +19,9 @@ class Repository @Inject constructor(
         }
     }
 
-    suspend fun getTaskById(id: Long): Resource<Task?> {
-        return withContext(ioDispatcher) {
-            localDataSource.getTaskById(id).let { return@withContext Resource.success(it) }
-        }
-    }
-
-
     suspend fun insertTask(task: Task) {
         return withContext(ioDispatcher) {
             localDataSource.insertAll(task)
-        }
-    }
-
-
-    suspend fun updateTask(task: Task) {
-        return withContext(ioDispatcher) {
-            localDataSource.updateTask(task)
         }
     }
 

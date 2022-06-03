@@ -1,4 +1,4 @@
-package com.bielfernandezb.todoapp.views.fragments
+package com.bielfernandezb.todoapp.main.views.fragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,14 +8,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bielfernandezb.todoapp.databinding.FragmentMainBinding
+import com.bielfernandezb.todoapp.main.MainViewModel
+import com.bielfernandezb.todoapp.main.adapters.TasksAdapter
 import com.bielfernandezb.todoapp.model.entities.Task
+import com.bielfernandezb.todoapp.new_task.views.activities.NewTaskActivity
 import com.bielfernandezb.todoapp.utils.Resource
-import com.bielfernandezb.todoapp.views.MainViewModel
-import com.bielfernandezb.todoapp.views.activities.NewTaskActivity
-import com.bielfernandezb.todoapp.views.adapters.TasksAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -28,7 +27,7 @@ class MainFragment : Fragment(), TasksAdapter.TaskItemListener {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentMainBinding.inflate(inflater, container, false)
         setupRecyclerView()
         return binding.root
@@ -46,7 +45,7 @@ class MainFragment : Fragment(), TasksAdapter.TaskItemListener {
     }
 
     private fun setupObservers() {
-        viewModel.tasks.observe(viewLifecycleOwner, Observer {
+        viewModel.tasks.observe(viewLifecycleOwner) {
             if (it != null) {
                 when (it.status) {
                     Resource.Status.SUCCESS -> {
@@ -56,9 +55,10 @@ class MainFragment : Fragment(), TasksAdapter.TaskItemListener {
                     }
                     Resource.Status.ERROR ->
                         Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                    else -> {}
                 }
             }
-        })
+        }
         binding.refreshLayout.setOnRefreshListener {
             viewModel.refreshTasks()
             binding.refreshLayout.isRefreshing = false
@@ -68,7 +68,7 @@ class MainFragment : Fragment(), TasksAdapter.TaskItemListener {
         }
     }
 
-    fun onNewTaskSelection() {
+    private fun onNewTaskSelection() {
         val intent = Intent(activity, NewTaskActivity::class.java)
         startActivity(intent)
     }

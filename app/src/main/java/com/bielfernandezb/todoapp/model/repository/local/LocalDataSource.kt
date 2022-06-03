@@ -14,11 +14,6 @@ class LocalDataSource @Inject constructor(
 
     suspend fun getAllTasks() = withContext(ioDispatcher) { return@withContext taskDao.getTasks() }
 
-    suspend fun getTaskById(id: Long) =
-        withContext(ioDispatcher) { return@withContext taskDao.getTaskById(id) }
-
-    suspend fun updateTask(task: Task) = withContext(ioDispatcher) { taskDao.updateTask(task) }
-
     suspend fun insertAll(task: Task) = withContext(ioDispatcher) {
         taskDao.insertTask(task)
     }

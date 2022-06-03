@@ -1,4 +1,4 @@
-package com.bielfernandezb.todoapp.views
+package com.bielfernandezb.todoapp.main
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,28 +11,26 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class NewTaskViewModel @Inject constructor(
+class MainViewModel @Inject constructor(
     private val repository: Repository
 ) : ViewModel() {
 
-    var task: MutableLiveData<Resource<Task?>> = MutableLiveData<Resource<Task?>>()
+    var tasks: MutableLiveData<Resource<List<Task?>>> = MutableLiveData<Resource<List<Task?>>>()
 
-    fun getTaskById(taskId: Long) {
+    fun getData() {
         viewModelScope.launch {
-            repository.getTaskById(taskId).let {
-                task.value = it
+            repository.getTasks().let {
+                tasks.value = it
             }
         }
     }
 
-    fun initialize(task: Task) {
-        getTaskById(task.id)
+    init {
+        refreshTasks()
     }
 
-
-    fun saveTask(task: Task) {
-        viewModelScope.launch {
-            repository.insertTask(task)
-        }
+    fun refreshTasks() {
+        getData()
     }
+
 }
