@@ -8,12 +8,11 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class NewTaskActivity : BaseActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
 
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_task)
-
         Navigator().navigateToNewTask(intent.extras, this)
-
     }
+
 }

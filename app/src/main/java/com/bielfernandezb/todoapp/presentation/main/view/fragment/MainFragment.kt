@@ -35,6 +35,7 @@ class MainFragment : BaseFragment(), TasksAdapter.TaskItemListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupObservers()
+        setupListeners()
     }
 
     private fun setupRecyclerView() {
@@ -52,16 +53,29 @@ class MainFragment : BaseFragment(), TasksAdapter.TaskItemListener {
                             adapter.setItems(tasks as List<Task>)
                         }
                     }
+
                     Resource.Status.ERROR ->
                         Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+
                     else -> {}
                 }
             }
         }
+    }
+
+    private fun setupListeners() {
+        refreshListener()
+        addTaskListener()
+    }
+
+    private fun refreshListener() {
         binding.refreshLayout.setOnRefreshListener {
             viewModel.refreshTasks()
             binding.refreshLayout.isRefreshing = false
         }
+    }
+
+    private fun addTaskListener() {
         binding.fabAddTask.setOnClickListener {
             onNewTaskSelection()
         }

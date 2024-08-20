@@ -19,7 +19,7 @@ class MainViewModel @Inject constructor(
 
     private fun getData() {
         viewModelScope.launch {
-            getTasksUseCase.invoke(Unit).let {
+            getTasksUseCase(Unit).let {
                 tasks.value = it
             }
         }

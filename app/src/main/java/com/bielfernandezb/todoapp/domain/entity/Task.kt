@@ -24,6 +24,7 @@ data class Task(
     @ColumnInfo(name = "completed")
     var completed: Boolean,
 ) : Parcelable {
+
     constructor(parcel: Parcel) : this(
         parcel.readLong(),
         parcel.readString().toString(),
@@ -60,4 +61,5 @@ data class Task(
             return arrayOfNulls(size)
         }
     }
+
 }

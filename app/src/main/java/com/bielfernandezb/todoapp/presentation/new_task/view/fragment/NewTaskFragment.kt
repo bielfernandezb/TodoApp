@@ -34,6 +34,7 @@ class NewTaskFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         getBundle()
         setupObservers()
+        setupListeners()
     }
 
     private fun getBundle() {
@@ -62,11 +63,16 @@ class NewTaskFragment : BaseFragment() {
                             Editable.Factory.getInstance().newEditable(it.data.description)
                     }
                 }
+
                 Resource.Status.ERROR ->
                     Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+
                 else -> {}
             }
         }
+    }
+
+    private fun setupListeners() {
         binding.fabSaveTask.setOnClickListener {
             saveTask()
             finish()
@@ -75,17 +81,25 @@ class NewTaskFragment : BaseFragment() {
 
     private fun saveTask() {
         task?.let { task ->
-            task.title = binding.addTaskTitle.text.toString()
-            task.description = binding.addTaskDescription.text.toString()
-            viewModel.saveTask(task)
+            saveCurrentTask(task)
         } ?: run {
-            viewModel.saveTask(
-                Task(
-                    binding.addTaskTitle.text.toString(),
-                    binding.addTaskDescription.text.toString()
-                )
-            )
+            saveNewTask()
         }
+    }
+
+    private fun saveCurrentTask(task: Task) {
+        task.title = binding.addTaskTitle.text.toString()
+        task.description = binding.addTaskDescription.text.toString()
+        viewModel.saveTask(task)
+    }
+
+    private fun saveNewTask() {
+        viewModel.saveTask(
+            Task(
+                binding.addTaskTitle.text.toString(),
+                binding.addTaskDescription.text.toString()
+            )
+        )
     }
 
     private fun finish() {

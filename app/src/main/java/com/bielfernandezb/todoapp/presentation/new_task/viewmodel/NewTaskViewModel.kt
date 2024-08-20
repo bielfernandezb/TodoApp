@@ -19,7 +19,8 @@ class NewTaskViewModel @Inject constructor(
 
     fun saveTask(task: Task) {
         viewModelScope.launch {
-            insertTaskUseCase.invoke(task)
+            insertTaskUseCase(task)
         }
     }
+
 }

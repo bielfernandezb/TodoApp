@@ -9,7 +9,7 @@ class GetTasksUseCase @Inject constructor(
     private val repository: Repository
 ) : BaseUseCase<Unit, Resource<List<Task?>>> {
 
-    override suspend fun invoke(unit: Unit): Resource<List<Task?>> =
+    override suspend fun invoke(params: Unit): Resource<List<Task?>> =
         repository.getTasks()
 
 }
